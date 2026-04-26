@@ -1,59 +1,55 @@
 #include<stdio.h>
-struct Items
+struct item
 {
-    int weight;
     int profit;
+    int weight;
     float ratio;
 };
-void sort(   struct Items itm1[],int n)
+void sort(struct item items[],int n)
 {
-    struct Items temp;
-    for(int i=0;i>n-1;i++)
+    struct item temp;
+    for (int i=0;i<n-1;i++)
     {
-        for(int j=0;j>n-i;j++)
+        for (int j=0;j<n-i-1;j++)
         {
-            if (itm1[j].ratio<itm1[j+1].ratio)
+            if (items[j].ratio<items[j+1].ratio)
             {
-                temp=itm1[j];
-                itm1[j]=itm1[j+1];
-                itm1[j+1]=temp;
+                temp = items[j];
+                items[j]=items[j+1];
+                items[j+1]=temp;
             }
         }
-    }
-    printf("items sortes by value/weight ratio:\n");
-    for (int i=0;i<n;i++)
-    {
-        printf("items %d:weight = %d,ratioi = %.2f\n",i+1,itm1[i].weight,itm1[i].profit);
     }
 }
 int main()
 {
-    int n,i,capacity;
-    float total_capacity = 0;
-    printf("Enter The Number of Items:");
-    scanf("%d" ,& n);
-    struct Items itm1[n];
-    for(i=0;i<n;i++)
-    {
-    printf("enter the item %d weight profit :",i+1);
-    scanf("%d %d",&itm1[i].weight,&itm1[i].profit);
-    itm1[i].ratio=itm1[i].profit/itm1[i].weight;
-    }
-    sort(itm1,n);
-    float totalprofit=0.0;
-    for(int i =0;i<n;i++)
-    {
-        if(capacity>=itm1[i].weight)
-        {
-            totalprofit+=itm1[i].profit;
-            capacity-+itm1[i].weight;
-        }
-        else
-        {
-            totalprofit+=itm1[i].ratio*capacity;
-            break;
-        }
-    }
-    printf("maximum profit =%,2f\n",totalprofit);
+    int c,n;
+    printf("enter capacity:");
+    scanf("%d",&c);
+     printf("enter no of items:");
+     scanf("%d",&n);
+     struct item itm[n];
+     for(int i=0;i<n;i++)
+     {
+        printf("enter item %d weight profit:",i+1);
+        scanf("%d" "%d",&itm[i].weight,&itm[i].profit);
+        itm[i].ratio=(itm[i].profit)/(itm[i].weight);
+     }
+     sort(itm,n);
+     float totalProfit=0.0;
+     for(int i=0;i<n;i++)
+     {
+         if (c >= itm[i].weight)
+         {
+             totalProfit += itm[i].profit;
+             c -= itm[i].weight;
+         }
+         else
+         {
+             totalProfit += itm[i].ratio*c;
+             break;
+         }
+     }
+     printf("Maximum profit =%.2f\n",totalProfit);
+    return 0;
 }
-
